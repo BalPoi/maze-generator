@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'by.bal.MazeApp'
+    }
+
+    // Copy dependencies to JAR file
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    // Java command line parser
+    implementation 'info.picocli:picocli:4.7.6'
+
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+}
